@@ -1,9 +1,14 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const userModel = require('./models/user');
+
+app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('This Project is about Data Association in Backend');
+  res.render("index");
 });
 
 app.listen(port, () => {
