@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <script src="http://cdn.tailwindcss.com"> </script>
+</head>
+<body style="font-family: 'Poppins', sans-serif;" class="text-lg">
+    <div class="w-full min-h-screen bg-gray-500 flex justify-center items-center ">
+        <div class="flex flex-col justify-center items-center bg-gray-800/50 backdrop-blur-md shadow-lg shadow-gray-900 rounded-md h-fit p-10 ">
+        <h1 class="text-xl font-bold mb-4">Login</h1>
+        <form action="/login" method="post" class="flex flex-col px-12 justify-center items-center text-white">
+            <input class="mb-2 p-2 rounded-md bg-gray-900 outline-none border-none focus:bg-gray-800 hover:bg-gray-700" type="email" placeholder="email" name="email">
+            <input class="mb-2 p-2 rounded-md bg-gray-900 outline-none border-none focus:bg-gray-800 hover:bg-gray-700" type="password" placeholder="Password" name="password">
+            <input class="shadow-md py-1 px-4 bg-gray-900 rounded-3xl cursor-pointer hover:bg-gray-500 transition duration-25 active:bg-gray-700 hover:text-gray-900 " type="submit" value="Login">
+            
+        </form>
+        <a href="/register">Don't have any Account?</a>
+    </div>
+    </div>
+</body>
+</html>

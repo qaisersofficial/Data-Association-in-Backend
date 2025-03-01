@@ -14,6 +14,14 @@ app.get('/', (req, res) => {
   res.render("index");
 });
 
+app.get('/login', (req, res) => {
+  res.render("login");
+});
+
+app.get('/register', (req, res) => {
+  res.render("index");
+});
+
 app.post('/register', async(req, res) => {
   let { username, name, email, age, password } = req.body;
 
@@ -32,9 +40,32 @@ app.post('/register', async(req, res) => {
       });
    const token = jwt.sign({email: email, userid: user._id}, "xyz");
    res.cookie("token", token)
-   res.send("registered") 
+   res.redirect("login")
     })
   });
+});
+
+app.post('/login', async(req, res) => {
+  let {email, password } = req.body;
+
+  let user = await userModel.findOne({email});
+  if(!user){
+    return res.status(400).send("User not found");
+  }
+  bcrypt.compare(password, user.password, function(err, result){
+    if(result){
+      const token = jwt.sign({email: email, userid: user._id}, "xyz");
+      res.cookie("token", token)
+      res.send("you can login")
+    }else{
+      res.redirect("login");
+    }
+  });
+});
+
+app.get('/logout', async(req, res) => {
+  res.clearCookie("token");
+  res.redirect("login");
 });
 
 app.listen(port, () => {
