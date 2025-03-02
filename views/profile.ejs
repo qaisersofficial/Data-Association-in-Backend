@@ -26,8 +26,14 @@
                     <div class="post mb-5 w-1/3 p-5 border-[1px] border-gray-400 bg-gray-600 rounded-md">
                         <h4 class="text-blue-500 font-bold italic">@<%= user.username %></h4>
                         <p class="text-white text-sm tracking-tight"><%= post.content %></p>
+                        <small class="mt-2 inline-block">
+                            <span class="font-bold"><%= post.likes.length %> </span>
+                            <%= post.likes.length === 0 || 1 ? 'like' : 'likes' %>
+                        </small>
                         <div class="btns mt-2 flex gap-6">
-                            <a href="" class="hover:underline text-blue-500">Like</a>
+                            <a href="/like/<%= post._id%>" class="hover:underline text-blue-500">
+                                <%= post.likes.includes(user._id) ? 'Unlike' : 'Like' %>
+                            </a></a>
                             <a href="" class="hover:underline hover:text-gray-400">Edit</a>
                         </div>
                     </div>
