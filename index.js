@@ -4,10 +4,12 @@ const port = 3000;
 const userModel = require('./models/user');
 const postModel = require('./models/post');
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 const jwt  = require('jsonwebtoken');
 
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -21,6 +23,17 @@ app.get('/login', (req, res) => {
 app.get('/register', (req, res) => {
   res.render("index");
 });
+
+app.get('/logout', async(req, res) => {
+  res.clearCookie("token");
+  res.redirect("login");
+});
+
+app.get('/profile', isLoggedIn, (req, res) => {
+  console.log(req.user);
+  res.render("login");
+});
+
 
 app.post('/register', async(req, res) => {
   let { username, name, email, age, password } = req.body;
@@ -63,10 +76,18 @@ app.post('/login', async(req, res) => {
   });
 });
 
-app.get('/logout', async(req, res) => {
-  res.clearCookie("token");
-  res.redirect("login");
-});
+// middleware to check if user is logged in
+function isLoggedIn(req, res, next){
+   if(req.cookies.token == ""){
+      res.send("You are not logged in");
+   }
+   else{
+    const data = jwt.verify(req.cookies.token, "xyz");
+    req.user = data;
+   }
+   next();
+
+}
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
