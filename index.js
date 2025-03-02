@@ -30,8 +30,7 @@ app.get('/logout', async(req, res) => {
 });
 
 app.get('/profile', isLoggedIn, (req, res) => {
-  console.log(req.user);
-  res.render("login");
+  res.render("profile");
 });
 
 
@@ -69,9 +68,7 @@ app.post('/login', async(req, res) => {
     if(result){
       const token = jwt.sign({email: email, userid: user._id}, "xyz");
       res.cookie("token", token)
-      res.send("you can login")
-    }else{
-      res.redirect("login");
+      res.redirect("profile")
     }
   });
 });
