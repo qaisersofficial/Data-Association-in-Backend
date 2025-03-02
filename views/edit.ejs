@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script src="http://cdn.tailwindcss.com"> </script>
+</head>
+<body>
+    <div class="w-full p-4 min-h-screen bg-gray-500">
+        <h5 class="mb-5">Editing <span class="font-bold italic"><%= post._id%> </span>post</h5>
+        <form action="/update/<%= post._id %>" method="post" class="flex flex-col px-12 justify-start text-white">
+            <textarea class="resize-none block w-96 m-2 p-2 rounded-md bg-transparent outline-none border-2 border-gray-400 focus:bg-gray-800 hover:bg-gray-700" placeholder="Want to edit it?" name="content"><%= post.content%></textarea>
+            <input class="shadow-md ml-6 py-1 w-fit block px-4 bg-yellow-900 rounded-3xl cursor-pointer hover:bg-yellow-500 transition duration-200 active:bg-gray-700 hover:text-yellow-900" type="submit" value="Update post">
+        </form>
+    </div>
+</body>
+</html>

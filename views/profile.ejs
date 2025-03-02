@@ -34,7 +34,7 @@
                             <a href="/like/<%= post._id%>" class="hover:underline text-blue-500">
                                 <%= post.likes.includes(user._id) ? 'Unlike' : 'Like' %>
                             </a></a>
-                            <a href="" class="hover:underline hover:text-gray-400">Edit</a>
+                            <a href="/edit/<%= post._id%>" class="hover:underline hover:text-gray-400">Edit</a>
                         </div>
                     </div>
                 <% }) %>
