@@ -4,17 +4,16 @@ var mongoDB = 'mongodb://127.0.0.1:27017/miniproject';
 mongoose.connect(mongoDB);
 
 const userSchema = mongoose.Schema({
-    username: String,
-    name: String,
-    email: String,
-    age: Number,
-    password: String,
+    username: { type: String, required: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    age: { type: Number, required: true },
+    password: { type: String, required: true },
     posts: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'post'
+            ref: 'user'
         }
     ]
 });
-
 module.exports = mongoose.model('user', userSchema);

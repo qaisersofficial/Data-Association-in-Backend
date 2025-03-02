@@ -11,9 +11,10 @@ app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-  res.render("index");
+  res.render("login");
 });
 
 app.get('/login', (req, res) => {
@@ -29,12 +30,15 @@ app.get('/logout', async(req, res) => {
   res.redirect("login");
 });
 
-app.get('/profile', isLoggedIn, (req, res) => {
-  res.render("profile");
+app.get('/profile', isLoggedIn, async (req, res) => {
+  let user = await userModel.findOne({email: req.user.email});
+  res.render("profile", {user});
+  // console.log(user);
 });
 
 
 app.post('/register', async(req, res) => {
+  // console.log("Received data:", req.body); 
   let { username, name, email, age, password } = req.body;
 
   let user = await userModel.findOne({email});
